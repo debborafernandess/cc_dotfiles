@@ -45,6 +45,7 @@ augroup vimrcEx
 
   " Set syntax highlighting for specific file types
   autocmd BufRead,BufNewFile Appraisals set filetype=ruby
+  autocmd BufRead,BufNewFile *.py set filetype=python
   autocmd BufRead,BufNewFile *.md set filetype=markdown
 
   " Enable spellchecking for Markdown
@@ -52,10 +53,14 @@ augroup vimrcEx
 
   " Automatically wrap at 80 characters for Markdown
   autocmd BufRead,BufNewFile *.md setlocal textwidth=80
+  autocmd BufRead,BufNewFile *.py setlocal textwidth=80
 
   " Automatically wrap at 72 characters and spell check git commit messages
   autocmd FileType gitcommit setlocal textwidth=72
   autocmd FileType gitcommit setlocal spell
+
+  " Automatically clear whitespace when save
+  autocmd BufWritePre * %s/\s\+$//e
 
   " Allow stylesheets to autocomplete hyphenated words
   autocmd FileType css,scss,sass setlocal iskeyword+=-
@@ -89,12 +94,14 @@ let g:ctrlp_by_filename = 1
 " Make it obvious where 80 characters is
 set textwidth=80
 set colorcolumn=+1
+let &colorcolumn=join(range(81,999),",")
+highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
 " Numbers
 set number
 set numberwidth=5
 " Make easy to navigate
-set relativenumber
+" set relativenumber
 
 " enable list of completion
 set wildmode=list:longest,list:full
