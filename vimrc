@@ -4,7 +4,7 @@ let mapleader = " "
 set backspace=2   " Backspace deletes like most programs in insert mode
 set nobackup
 set nowritebackup
-set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
+set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignoreit-458413287
 set history=1000  " a lot of history
 set ruler         " show the cursor position all the time
 set hlsearch
@@ -17,12 +17,12 @@ set smartcase     " ...unless we type a capital
 set showmode      "Show current mode down the bottom
 set visualbell    " No noise
 set nowrap        "Don't wrap lines
-
+set clipboard=unnamed "Copy through tmux sessions"
 syntax on
 
 so ~/.vim/plugins.vim
 
-" laod custom settings
+" load custom settings
 so ~/.vim/settings.vim
 
 " Load matchit.vim, but only if the user hasn't installed a newer version.
@@ -45,6 +45,7 @@ augroup vimrcEx
 
   " Set syntax highlighting for specific file types
   autocmd BufRead,BufNewFile Appraisals set filetype=ruby
+  autocmd BufRead,BufNewFile *.py set filetype=py
   autocmd BufRead,BufNewFile *.md set filetype=markdown
 
   " Enable spellchecking for Markdown
@@ -59,6 +60,9 @@ augroup vimrcEx
 
   " Allow stylesheets to autocomplete hyphenated words
   autocmd FileType css,scss,sass setlocal iskeyword+=-
+
+  " Remove all trailing whitespace everytime the user issues a :w command
+  autocmd BufWritePre * %s/\s\+$//e
 augroup END
 
 " Softtabs, 2 spaces
@@ -82,19 +86,22 @@ if executable('ag')
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
+  let g:ctrlp_show_hidden = 1
 endif
 " Default to filename searches
 let g:ctrlp_by_filename = 1
 
 " Make it obvious where 80 characters is
 set textwidth=80
-set colorcolumn=+1
+" set colorcolumn=+1
+let &colorcolumn=join(range(81,999),",")
+highlight ColorColumn ctermbg=235 guibg=#000000
 
 " Numbers
 set number
-set numberwidth=5
+set numberwidth=3
 " Make easy to navigate
-set relativenumber
+" set relativenumber
 
 " enable list of completion
 set wildmode=list:longest,list:full
