@@ -54,7 +54,8 @@
   timeline = log --oneline --graph --decorate
 
   # pull
-  pl = pull                         # pull
+  pl  = pull                         # pull
+  plr = pull --recurse-submodules
 
   # push
   ps = push                         # push
@@ -84,6 +85,7 @@
 
   # tag
   t = tag -n                        # show tags with <n> lines of each tag message
+  tl = describe --tags              # show last pushed tag
 
 [format]
   pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
