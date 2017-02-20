@@ -63,8 +63,7 @@ alias hfull='history 1 -1'
 # Git Aliases
 alias gs='git status'
 alias gst='git status'
-alias gsts='git stash'
-alias gstsh='git stash'
+alias gss='git stash'
 alias gsp='git stash pop'
 alias gsa='git stash apply'
 alias gsl='git stash list'
@@ -143,10 +142,10 @@ alias gi='gem install --no-ri --no-rdoc'
 # Forward port 80 to 3000
 alias portforward='sudo ipfw add 1000 forward 127.0.0.1,3000 ip from any to any 80 in'
 
-alias rdm='rake db:migrate'
-alias rdr='rake db:rollback'
-alias rdmr='rake db:migrate:redo'
-alias rrs='rake routes'
+alias rdm='bundle exec rake db:migrate'
+alias rdr='bundle exec rake db:rollback'
+alias rdmr='bundle exec rake db:migrate:redo'
+alias rr='bundle exec rake routes'
 
 # Rspec
 alias rs='rspec spec'
@@ -166,3 +165,4 @@ alias brewu='brew update && brew upgrade && brew cleanup && brew prune && brew d
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
 
 # vim: ft=zsh
+
